@@ -104,7 +104,7 @@ def main():
 
 	grid = Grid(ROWS, COLS, *get_cells())
 
-	# draw_gridlines(window, grid)
+	draw_gridlines(window, grid)
 
 	start = grid[0, COLS // 2]
 
