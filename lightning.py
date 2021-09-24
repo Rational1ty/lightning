@@ -45,7 +45,7 @@ def bfs(grid: Grid, window: g.GraphWin, start: Cell) -> Union[Cell, None]:
 
 		if curr in visited: continue
 
-		curr.sethighlight(Cell.HIGH, window)
+		curr.sethighlight(Cell.HL_HIGH, window)
 		sleep(0.005)
 		
 		# get its neighbors
@@ -82,7 +82,7 @@ def dfs(grid: Grid, window: g.GraphWin, start: Cell, visited: set[Cell]) -> Unio
 	if start in visited: return None
 
 	visited.add(start)
-	start.sethighlight(Cell.HIGH, window)
+	start.sethighlight(Cell.HL_HIGH, window)
 	sleep(0.05)
 
 	adj = start.getadjacent(grid)
@@ -106,15 +106,15 @@ def main():
 	start = grid[0, COLS // 2]
 
 	sleep(1)
-	(bfs(grid, window, start) or start).sethighlight(Cell.HIGH, window)
+	(bfs(grid, window, start) or start).sethighlight(Cell.HL_HIGH, window)
 	sleep(2)
 
 	for cell in grid:
 		cell: Cell
-		cell.sethighlight(Cell.OFF)
+		cell.sethighlight(Cell.HL_OFF)
 
 	sleep(1)
-	(dfs(grid, window, start, set()) or start).sethighlight(Cell.HIGH, window)
+	(dfs(grid, window, start, set()) or start).sethighlight(Cell.HL_HIGH, window)
 	sleep(2)
 
 	window.close()

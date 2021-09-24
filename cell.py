@@ -6,10 +6,10 @@ import graphics as g
 
 
 class Cell:
-	HIGH = 3
-	MED = 2
-	LOW = 1
-	OFF = 0
+	HL_HIGH = 3
+	HL_MED = 2
+	HL_LOW = 1
+	HL_OFF = 0
 
 	def __init__(self, row: int, col: int):
 		self.row = row
@@ -55,7 +55,7 @@ class Cell:
 	def sethighlight(self, hl: int, window: g.GraphWin = None):
 		self.highlight = hl
 
-		if hl == Cell.OFF:
+		if hl == Cell.HL_OFF:
 			self.rect.undraw()
 			return
 
@@ -73,9 +73,9 @@ class Cell:
 
 	def getcolor(self, hl: int) -> str:
 		return \
-			HIGHLIGHT_1 if hl == Cell.HIGH else \
-			HIGHLIGHT_2 if hl == Cell.MED else \
-			HIGHLIGHT_3 if hl == Cell.LOW else \
+			HIGHLIGHT_1 if hl == Cell.HL_HIGH else \
+			HIGHLIGHT_2 if hl == Cell.HL_MED else \
+			HIGHLIGHT_3 if hl == Cell.HL_LOW else \
 			None
 
 	def __repr__(self) -> str:
