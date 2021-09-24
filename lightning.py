@@ -39,8 +39,6 @@ def bfs(grid: Grid, window: g.GraphWin, start: Cell) -> Union[Cell, None]:
 	q = deque([start])
 	visited = set()
 
-	max_dist = 0
-
 	# while there are elements in the queue
 	while len(q) > 0:
 		curr = q.popleft()	# get first element from queue
@@ -71,7 +69,6 @@ def update_highlights(visited: set[Cell], window: g.GraphWin):
 	for cell in visited:
 		if cell.highlight > 0:
 			cell.sethighlight(cell.highlight - 1, window)
-	# window.redraw()
 
 
 def manhattan_dist(cell_1: Cell, cell_2: Cell) -> int:

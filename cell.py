@@ -1,5 +1,4 @@
 from random import random
-from typing import Union
 
 from constants import CELL_SIZE, COLS, HIGHLIGHT_1, HIGHLIGHT_2, HIGHLIGHT_3, PROB_HORIZ, PROB_VERT, ROWS
 from grid import Grid
@@ -58,11 +57,9 @@ class Cell:
 
 		if hl == Cell.OFF:
 			self.rect.undraw()
-			# window.delItem(self.rect)
 			return
 
-		if window is None:
-			raise ValueError("Must provide argument for `window` when setting highlight")
+		assert window is not None, 'Must provide argument for `window` when setting highlight'
 
 		color = self.getcolor(hl)
 
@@ -71,7 +68,6 @@ class Cell:
 
 		try:
 			self.rect.draw(window) 
-			# window.addItem(self.rect)
 		except g.GraphicsError:
 			pass
 
