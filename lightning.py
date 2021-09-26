@@ -108,9 +108,12 @@ def main():
 	sleep(1)
 
 	while not done:
-		# update_highlights(bfs.visited, window)
+		update_highlights(bfs.visited, window)
 
 		front = bfs.next_front()
+
+		if len(front) == 0:
+			done = True
 
 		for cell in front:
 			cell.sethighlight(Cell.HL_HIGH, window)

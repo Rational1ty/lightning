@@ -15,9 +15,9 @@ REFRESH_RATE = 10
 # colors
 BG_COLOR = color_rgb(30, 30, 30)
 FG_COLOR = color_rgb(200, 200, 200)
-HIGHLIGHT_1 = color_rgb(255, 255, 185)
-HIGHLIGHT_2 = color_rgb(255, 255, 205)
-HIGHLIGHT_3 = color_rgb(255, 255, 225)
+HIGHLIGHT_1 = color_rgb(240, 240, 120)
+HIGHLIGHT_2 = color_rgb(160, 160, 80)
+HIGHLIGHT_3 = color_rgb(80, 80, 40)
 
 # probability
 PROB_VERT = 0.5
