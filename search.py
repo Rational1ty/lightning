@@ -12,7 +12,6 @@ class BreadthFirstSearch:
 		self.q = deque([start])
 
 		self.start = start
-	
 		self.first = True
 
 	def next_front(self) -> list[Cell]:
@@ -41,7 +40,3 @@ class BreadthFirstSearch:
 
 		self.q = deque(front)
 		return front
-
-
-class DepthFirstSearch:
-	...

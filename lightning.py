@@ -6,7 +6,8 @@ from typing import Generator
 import graphics as g
 
 from cell import Cell
-from constants import BG_COLOR, COLS, FG_COLOR, HEIGHT, HIGHLIGHT_SPECIAL, REFRESH_RATE, ROWS, WIDTH
+from constants import COLS, HEIGHT, REFRESH_RATE, ROWS, WIDTH
+from constants import BG_COLOR, FG_COLOR, HIGHLIGHT_SPECIAL
 from grid import Grid
 
 
@@ -45,25 +46,6 @@ def clear_highlights(grid: Grid):
 		cell: Cell
 		cell.sethighlight(Cell.HL_OFF)
 
-
-# def dfs(grid: Grid, window: g.GraphWin, start: Cell, visited: set[Cell]) -> Union[Cell, None]:
-# 	if start.row == ROWS - 1:
-# 		return start
-
-# 	if start in visited: return None
-
-# 	visited.add(start)
-# 	start.sethighlight(Cell.HL_HIGH, window)
-# 	sleep(0.05)
-
-# 	adj = start.getadjacent(grid)
-
-# 	for cell in adj:
-# 		res = dfs(grid, window, cell, visited)
-# 		if res is None: continue
-# 		return res
-
-# 	return None
 
 def main():
 	window = g.GraphWin('Lightning', WIDTH, HEIGHT, autoflush=False)
