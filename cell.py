@@ -27,6 +27,19 @@ class Cell:
 			g.Point(self.end.x - 5, self.end.y - 5)
 		)
 
+		self.parent = None
+
+	@staticmethod
+	def backtrack(start: 'Cell') -> list['Cell']:
+		path = [start]
+		curr = start
+		
+		while curr.parent is not None:
+			path.append(curr.parent)
+			curr = curr.parent
+
+		return path
+
 	def getadjacent(self, grid: Grid) -> list['Cell']:
 		r, c = self.row, self.col
 		row_max = ROWS - 1
@@ -51,6 +64,21 @@ class Cell:
 			neighbors[3] = None
 		
 		return list(filter(lambda c: c is not None, neighbors))
+
+	def setcolor(self, color: str, window: g.GraphWin = None):
+		if color is None:
+			self.rect.undraw()
+			return
+
+		assert window is not None, 'Must provide argument for `window` when setting color'
+
+		self.rect.setFill(color)
+		self.rect.setOutline(color)
+
+		try:
+			self.rect.draw(window) 
+		except g.GraphicsError:
+			pass
 
 	def sethighlight(self, hl: int, window: g.GraphWin = None):
 		self.highlight = hl

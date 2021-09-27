@@ -18,6 +18,7 @@ FG_COLOR = color_rgb(200, 200, 200)
 HIGHLIGHT_1 = color_rgb(240, 240, 120)
 HIGHLIGHT_2 = color_rgb(160, 160, 80)
 HIGHLIGHT_3 = color_rgb(80, 80, 40)
+HIGHLIGHT_SPECIAL = color_rgb(40, 210, 255)
 
 # probability
 PROB_VERT = 0.5

@@ -1,13 +1,12 @@
 import itertools as it
-from collections import deque
 from search import BreadthFirstSearch
 from time import sleep
-from typing import Generator, Union
+from typing import Generator
 
 import graphics as g
 
 from cell import Cell
-from constants import BG_COLOR, COLS, FG_COLOR, HEIGHT, REFRESH_RATE, ROWS, WIDTH
+from constants import BG_COLOR, COLS, FG_COLOR, HEIGHT, HIGHLIGHT_SPECIAL, REFRESH_RATE, ROWS, WIDTH
 from grid import Grid
 
 
@@ -26,50 +25,25 @@ def draw_gridlines(window: g.GraphWin, grid: Grid):
 		if cell.top:
 			line = g.Line(cell.start, pt(cell.end.x, cell.start.y))
 			line.setFill(FG_COLOR)
-			window.addItem(line)
+			line.draw(window)
 
 		if cell.left:
 			line = g.Line(cell.start, pt(cell.start.x, cell.end.y))
 			line.setFill(FG_COLOR)
-			window.addItem(line)
-
-	window.redraw()
-
-
-# def bfs(grid: Grid, window: g.GraphWin, start: Cell) -> Union[Cell, None]:
-# 	q = deque([start])
-# 	visited = set()
-
-# 	# while there are elements in the queue
-# 	while len(q) > 0:
-# 		curr = q.popleft()	# get first element from queue
-
-# 		if curr in visited: continue
-
-# 		curr.sethighlight(Cell.HL_HIGH, window)
-# 		sleep(0.005)
-		
-# 		# get its neighbors
-# 		adj = curr.getadjacent(grid)
-
-# 		# check if adjacent cells have been visited or are at end
-# 		for cell in adj:
-# 			if cell in visited:
-# 				adj.remove(cell)
-# 				continue
-# 			if cell.row == ROWS - 1:
-# 				return cell
-
-# 		visited.add(curr)	# current cell has been visited
-# 		q.extend(adj)		# add adjacent cells to queue
-
-# 	return None
+			line.draw(window)
+	g.update()
 
 
 def update_highlights(visited: set[Cell], window: g.GraphWin):
 	for cell in visited:
-		if cell.highlight > 0:
+		if cell.highlight > Cell.HL_OFF:
 			cell.sethighlight(cell.highlight - 1, window)
+
+
+def clear_highlights(grid: Grid):
+	for cell in grid:
+		cell: Cell
+		cell.sethighlight(Cell.HL_OFF)
 
 
 # def dfs(grid: Grid, window: g.GraphWin, start: Cell, visited: set[Cell]) -> Union[Cell, None]:
@@ -100,10 +74,11 @@ def main():
 
 	draw_gridlines(window, grid)
 
-	start = grid[0, COLS // 2]
+	start: Cell = grid[0, COLS // 2]
 
-	bfs = BreadthFirstSearch(grid, start, window)
+	bfs = BreadthFirstSearch(grid, start)
 	done = False
+	end = None
 
 	sleep(1)
 
@@ -120,10 +95,24 @@ def main():
 			
 			if cell.row == ROWS - 1:
 				done = True
+				end = cell
 
 		g.update(REFRESH_RATE)
 		
+	# display path
 	sleep(1)
+	clear_highlights(grid)
+
+	path = Cell.backtrack(end)
+	for cell in path:
+		cell.sethighlight(Cell.HL_HIGH, window)
+
+	start.setcolor(HIGHLIGHT_SPECIAL, window)
+	end.setcolor(HIGHLIGHT_SPECIAL, window)
+	
+	g.update()
+	sleep(2)
+
 	window.close()
 
 
