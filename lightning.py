@@ -1,5 +1,4 @@
 import itertools as it
-from search import BreadthFirstSearch
 from time import sleep
 from typing import Generator
 
@@ -8,6 +7,7 @@ import graphics as g
 from cell import Cell
 from constants import *
 from grid import Grid
+from search import BreadthFirstSearch
 
 
 def pt(x: int, y: int) -> g.Point:

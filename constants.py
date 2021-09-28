@@ -1,5 +1,6 @@
-from math import floor
 import ctypes
+from math import floor
+
 from graphics import color_rgb
 
 # system 
@@ -9,7 +10,7 @@ SCREEN_HEIGHT = ctypes.windll.user32.GetSystemMetrics(1)
 # window, cells, and grid
 MAX_WIDTH = 1000
 MAX_HEIGHT = 700
-CELL_SIZE = 20
+CELL_SIZE = 15
 CELL_PADDING = 2
 WIDTH = floor(MAX_WIDTH / CELL_SIZE) * CELL_SIZE
 HEIGHT = floor(MAX_HEIGHT / CELL_SIZE) * CELL_SIZE

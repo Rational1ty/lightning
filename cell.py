@@ -1,8 +1,9 @@
 from random import random
 
+import graphics as g
+
 from constants import *
 from grid import Grid
-import graphics as g
 
 
 class Cell:
