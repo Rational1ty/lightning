@@ -1,14 +1,12 @@
 from random import random
 
-from constants import CELL_SIZE, COLS, HIGHLIGHT_1, HIGHLIGHT_2, HIGHLIGHT_3, PROB_HORIZ, PROB_VERT, ROWS
+from constants import CELL_SIZE, COLS, HIGHLIGHT_1, HIGHLIGHT_2, HIGHLIGHT_3, PROB_HORIZ, PROB_VERT, ROWS, gethighlightcolor
 from grid import Grid
 import graphics as g
 
 
 class Cell:
-	HL_HIGH = 3
-	HL_MED = 2
-	HL_LOW = 1
+	HL_MAX = 3
 	HL_OFF = 0
 
 	def __init__(self, row: int, col: int):
@@ -23,8 +21,8 @@ class Cell:
 
 		self.highlight = 0
 		self.rect = g.Rectangle(
-			g.Point(self.start.x + 5, self.start.y + 5),
-			g.Point(self.end.x - 5, self.end.y - 5)
+			g.Point(self.start.x + 0, self.start.y + 0),
+			g.Point(self.end.x - 0, self.end.y - 0)
 		)
 
 		self.parent = None
@@ -89,7 +87,7 @@ class Cell:
 
 		assert window is not None, 'Must provide argument for `window` when setting highlight'
 
-		color = self.getcolor(hl)
+		color = gethighlightcolor(hl)
 
 		self.rect.setFill(color)
 		self.rect.setOutline(color)
@@ -98,13 +96,6 @@ class Cell:
 			self.rect.draw(window) 
 		except g.GraphicsError:
 			pass
-
-	def getcolor(self, hl: int) -> str:
-		return \
-			HIGHLIGHT_1 if hl == Cell.HL_HIGH else \
-			HIGHLIGHT_2 if hl == Cell.HL_MED else \
-			HIGHLIGHT_3 if hl == Cell.HL_LOW else \
-			None
 
 	def __repr__(self) -> str:
 		return f'Cell({self.row}, {self.col})'

@@ -6,9 +6,11 @@ from typing import Generator
 import graphics as g
 
 from cell import Cell
-from constants import COLS, HEIGHT, REFRESH_RATE, ROWS, WIDTH
-from constants import BG_COLOR, FG_COLOR, HIGHLIGHT_SPECIAL
+from constants import COLS, HEIGHT, ROWS, STRIKE_PROP_RATE, WIDTH
+from constants import BG_COLOR, FG_COLOR
+from constants import REFRESH_RATE, STRIKE_FADE_RATE
 from grid import Grid
+import winsound as sound
 
 
 def pt(x: int, y: int) -> g.Point:
@@ -47,6 +49,36 @@ def clear_highlights(grid: Grid):
 		cell.sethighlight(Cell.HL_OFF)
 
 
+def strike(cells: set[Cell], window: g.GraphWin, times: int = 2):
+	for _ in range(times):
+		for cell in cells:
+			cell.sethighlight(Cell.HL_MAX, window)
+		g.update()
+		
+		for __ in range(Cell.HL_MAX):
+			update_highlights(cells, window)
+			g.update(STRIKE_FADE_RATE)
+
+
+def play_strike_sequence(cells: list[Cell], grid: Grid, window: g.GraphWin):
+	sleep(0.1)
+	clear_highlights(grid)
+
+	for cell in cells:
+		cell.sethighlight(Cell.HL_MAX, window)
+		g.update(STRIKE_PROP_RATE)
+
+	strike(set(cells), window)
+	sleep(0.01)
+	strike(set(cells), window, 1)
+
+	for cell in cells:
+		cell.sethighlight(Cell.HL_MAX, window)
+
+	g.update()
+	sleep(2)
+
+
 def main():
 	window = g.GraphWin('Lightning', WIDTH, HEIGHT, autoflush=False)
 	window.setBackground(BG_COLOR)
@@ -65,36 +97,23 @@ def main():
 	sleep(1)
 
 	while not done:
-		update_highlights(bfs.visited, window)
-
 		front = bfs.next_front()
 
 		if len(front) == 0:
-			done = True
+			exit(0)
 
 		for cell in front:
-			cell.sethighlight(Cell.HL_HIGH, window)
-			
 			if cell.row == ROWS - 1:
 				done = True
 				end = cell
+			cell.sethighlight(Cell.HL_MAX, window)
 
+		update_highlights(bfs.visited, window)
 		g.update(REFRESH_RATE)
-		
-	# display path
-	sleep(1)
-	clear_highlights(grid)
 
 	path = Cell.backtrack(end)
-	for cell in path:
-		cell.sethighlight(Cell.HL_HIGH, window)
-
-	start.setcolor(HIGHLIGHT_SPECIAL, window)
-	end.setcolor(HIGHLIGHT_SPECIAL, window)
+	play_strike_sequence(path, grid, window)
 	
-	g.update()
-	sleep(2)
-
 	window.close()
 
 
