@@ -6,11 +6,8 @@ from typing import Generator
 import graphics as g
 
 from cell import Cell
-from constants import COLS, HEIGHT, ROWS, STRIKE_PROP_RATE, WIDTH
-from constants import BG_COLOR, FG_COLOR
-from constants import REFRESH_RATE, STRIKE_FADE_RATE
+from constants import *
 from grid import Grid
-import winsound as sound
 
 
 def pt(x: int, y: int) -> g.Point:
@@ -82,11 +79,12 @@ def play_strike_sequence(cells: list[Cell], grid: Grid, window: g.GraphWin):
 def main():
 	window = g.GraphWin('Lightning', WIDTH, HEIGHT, autoflush=False)
 	window.setBackground(BG_COLOR)
-	window.toScreen(0, 0)
+	window.master.geometry(f'{WIDTH}x{HEIGHT}+{POS_X}+{POS_Y}')
 
 	grid = Grid(ROWS, COLS, *get_cells())
 
-	draw_gridlines(window, grid)
+	if SHOW_GRID:
+		draw_gridlines(window, grid)
 
 	start: Cell = grid[0, COLS // 2]
 
@@ -114,7 +112,7 @@ def main():
 	path = Cell.backtrack(end)
 	play_strike_sequence(path, grid, window)
 	
-	window.close()
+	window.getKey()
 
 
 if __name__ == '__main__':
