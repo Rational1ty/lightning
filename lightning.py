@@ -18,10 +18,8 @@ def get_cells() -> Generator[Cell, None, None]:
 	yield from (Cell(r, c) for r, c in it.product(range(ROWS), range(COLS)))
 
 
-def draw_gridlines(window: g.GraphWin, grid: Grid):
+def draw_gridlines(window: g.GraphWin, grid: Grid[Cell]):
 	for cell in grid:
-		cell: Cell
-
 		if cell.top:
 			line = g.Line(cell.start, pt(cell.end.x, cell.start.y))
 			line.setFill(FG_COLOR)
@@ -40,9 +38,8 @@ def update_highlights(visited: set[Cell], window: g.GraphWin):
 			cell.sethighlight(cell.highlight - 1, window)
 
 
-def clear_highlights(grid: Grid):
+def clear_highlights(grid: Grid[Cell]):
 	for cell in grid:
-		cell: Cell
 		cell.sethighlight(Cell.HL_OFF)
 
 
@@ -57,7 +54,7 @@ def strike(cells: set[Cell], window: g.GraphWin, times: int = 2):
 			g.update(STRIKE_FADE_RATE)
 
 
-def play_strike_sequence(cells: list[Cell], grid: Grid, window: g.GraphWin):
+def play_strike_sequence(cells: list[Cell], grid: Grid[Cell], window: g.GraphWin):
 	sleep(0.1)
 	clear_highlights(grid)
 

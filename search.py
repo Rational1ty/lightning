@@ -5,7 +5,7 @@ from grid import Grid
 
 
 class BreadthFirstSearch:
-	def __init__(self, grid: Grid, start: Cell):
+	def __init__(self, grid: Grid[Cell], start: Cell):
 		self.grid = grid
 
 		self.visited = set()

@@ -39,7 +39,7 @@ class Cell:
 
 		return path
 
-	def getadjacent(self, grid: Grid) -> list['Cell']:
+	def getadjacent(self, grid: Grid['Cell']) -> list['Cell']:
 		r, c = self.row, self.col
 		row_max = ROWS - 1
 		col_max = COLS - 1
