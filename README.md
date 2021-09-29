@@ -2,6 +2,6 @@
 
 Maze + search algorithm = lightning
 
-### Usage:
+### Usage
 
 ```$ python lightning.py```
