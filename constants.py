@@ -8,7 +8,7 @@ SCREEN_WIDTH = ctypes.windll.user32.GetSystemMetrics(0)
 SCREEN_HEIGHT = ctypes.windll.user32.GetSystemMetrics(1)
 
 # window, cells, and grid
-MAX_WIDTH = 1000
+MAX_WIDTH = 1200
 MAX_HEIGHT = 700
 CELL_SIZE = 15
 CELL_PADDING = 2
@@ -39,6 +39,7 @@ PROB_VERT = 0.5
 PROB_HORIZ = 0.25
 
 # options
-SHOW_GRID = False
+SHOW_GRID = True
+FADE_CELLS = True
 MULTIPLE_STARTS = True
 N_STARTS = 3

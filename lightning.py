@@ -108,7 +108,8 @@ def main():
 				end = cell
 			cell.sethighlight(Cell.HL_MAX, window)
 
-		update_highlights(bfs.visited, window)
+		if FADE_CELLS:
+			update_highlights(bfs.visited, window)
 		g.update(REFRESH_RATE)
 
 	path = Cell.backtrack(end)
