@@ -22,7 +22,7 @@ POS_Y = 0
 assert CELL_PADDING * 2 < CELL_SIZE, 'Cell padding too large'
 
 # timing
-REFRESH_RATE = 10
+REFRESH_RATE = 15
 STRIKE_FADE_RATE = 20
 STRIKE_PROP_RATE = 0
 
@@ -39,4 +39,6 @@ PROB_VERT = 0.5
 PROB_HORIZ = 0.25
 
 # options
-SHOW_GRID = True
+SHOW_GRID = False
+MULTIPLE_STARTS = True
+N_STARTS = 3

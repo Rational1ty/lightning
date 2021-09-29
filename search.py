@@ -5,20 +5,20 @@ from grid import Grid
 
 
 class BreadthFirstSearch:
-	def __init__(self, grid: Grid[Cell], start: Cell):
+	def __init__(self, grid: Grid[Cell], *start: Cell):
 		self.grid = grid
 
 		self.visited = set()
-		self.q = deque([start])
+		self.q = deque(start)
 
 		self.start = start
 		self.first = True
 
 	def next_front(self) -> list[Cell]:
-		# return starting cell on first call
+		# return starting cells on first call
 		if self.first:
 			self.first = False
-			return [self.start]
+			return list(self.start)
 
 		front = []
 

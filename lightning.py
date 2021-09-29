@@ -1,4 +1,5 @@
 import itertools as it
+import random
 from time import sleep
 from typing import Generator
 
@@ -16,6 +17,11 @@ def pt(x: int, y: int) -> g.Point:
 
 def get_cells() -> Generator[Cell, None, None]:
 	yield from (Cell(r, c) for r, c in it.product(range(ROWS), range(COLS)))
+
+
+def get_start(grid: Grid[Cell]) -> tuple[Cell, ...]:
+	n = N_STARTS if MULTIPLE_STARTS else 1
+	return random.sample(list(grid[0:1]), n)
 
 
 def draw_gridlines(window: g.GraphWin, grid: Grid[Cell]):
@@ -70,7 +76,6 @@ def play_strike_sequence(cells: list[Cell], grid: Grid[Cell], window: g.GraphWin
 		cell.sethighlight(Cell.HL_MAX, window)
 
 	g.update()
-	sleep(2)
 
 
 def main():
@@ -83,9 +88,9 @@ def main():
 	if SHOW_GRID:
 		draw_gridlines(window, grid)
 
-	start: Cell = grid[0, COLS // 2]
+	start = get_start(grid)
 
-	bfs = BreadthFirstSearch(grid, start)
+	bfs = BreadthFirstSearch(grid, *start)
 	done = False
 	end = None
 
