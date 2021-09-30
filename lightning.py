@@ -70,7 +70,7 @@ def play_strike_sequence(cells: list[Cell], grid: Grid[Cell], window: g.GraphWin
 
 	strike(set(cells), window)
 	sleep(0.01)
-	strike(set(cells), window, 1)
+	strike(set(cells), window)
 
 	for cell in cells:
 		cell.sethighlight(Cell.HL_MAX, window)

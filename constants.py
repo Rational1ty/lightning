@@ -21,18 +21,28 @@ POS_Y = 0
 
 assert CELL_PADDING * 2 < CELL_SIZE, 'Cell padding too large'
 
-# timing
-REFRESH_RATE = 15
-STRIKE_FADE_RATE = 20
-STRIKE_PROP_RATE = 0
-
 # colors
 BG_COLOR = color_rgb(30, 30, 30)
 FG_COLOR = color_rgb(100, 100, 100)
-HIGHLIGHT_1 = color_rgb(240, 240, 120)
-HIGHLIGHT_2 = color_rgb(160, 160, 80)
-HIGHLIGHT_3 = color_rgb(80, 80, 40)
-HIGHLIGHT_SPECIAL = color_rgb(40, 210, 255)
+
+# # yellow
+# HIGHLIGHT = (
+# 	color_rgb(240, 240, 120),
+# 	color_rgb(160, 160, 80),
+# 	color_rgb(80, 80, 40),
+# )
+
+# blue
+HIGHLIGHT = (
+	color_rgb(150, 235, 255),
+	color_rgb(100, 175, 195),
+	color_rgb(60, 100, 110)
+)
+
+# timing
+REFRESH_RATE = 15
+STRIKE_FADE_RATE = len(HIGHLIGHT) * 30 / 4
+STRIKE_PROP_RATE = 0
 
 # probability
 PROB_VERT = 0.5

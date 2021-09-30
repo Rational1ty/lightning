@@ -7,7 +7,7 @@ from grid import Grid
 
 
 class Cell:
-	HL_MAX = 3
+	HL_MAX = len(HIGHLIGHT)
 	HL_OFF = 0
 
 	def __init__(self, row: int, col: int):
@@ -99,11 +99,7 @@ class Cell:
 			pass
 
 	def _getcolor(self, hl: int) -> str:
-		return \
-			HIGHLIGHT_1 if hl == Cell.HL_MAX else \
-			HIGHLIGHT_2 if hl == Cell.HL_MAX - 1 else \
-			HIGHLIGHT_3 if hl == Cell.HL_MAX - 2 else \
-			None
+		return HIGHLIGHT[Cell.HL_MAX - hl]
 
 	def __repr__(self) -> str:
 		return f'Cell({self.row}, {self.col})'
