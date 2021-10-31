@@ -1,7 +1,7 @@
 # Lightning
 
-Maze + search algorithm = lightning
+Maze + search algorithm = lightning.
 
-### Usage
+## Usage
 
 ```$ python lightning.py```
